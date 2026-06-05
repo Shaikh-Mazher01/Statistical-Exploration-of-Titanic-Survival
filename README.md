@@ -8,6 +8,7 @@ Before exploring patterns, the raw dataset was audited and restructured to ensur
 Missing Data Resolution: The Cabin column was dropped due to catastrophic missingness (>75%). Missing Embarked values were imputed using the statistical mode (S). Missing Age entries were handled dynamically using median imputation grouped by passenger characteristics to eliminate bias.
 Feature Engineering: The confusing and mathematically redundant columns SibSp (siblings/spouses) and Parch (parents/children) were consolidated into a single metric: FamilySize ( FamilySize=SibSp+Parch+1 ).
 Outlier Stabilization: The heavily right-skewed Fare feature was normalized using a log-transformation (np.log1p), preventing extreme values from distorting distance-based metrics or linear variance.
+
 2. Key Analytical Insights & Statistical Validations
 📊 Insight 1: Gender was the Primary Shield
 The data overwhelmingly confirms the historical "Women and children first" protocol. Females achieved a massive survival rate (exceeding 70%), while adult males faced a staggering mortality rate with over 450 casualties.
@@ -27,5 +28,6 @@ Large Families ( FamilySize≥5 ): Survival rates completely collapsed, as navig
 While adult males faced near-total casualty rates, young boys (Ages 0–10) showed a prominent spike in density on the survival side of the distribution, confirming their prioritization during evacuation.
 
 🔬 Statistical Validation (Independent Two-Sample T-Test): An Independent T-Test was performed comparing the ages of survivors versus non-survivors. The test yielded a statistically significant result ( p=0.0031<0.05 ), rejecting the Null Hypothesis ( H0 ). This confirms that the age difference between survivors (who skewed younger in the male cohort) and casualties is mathematically meaningful and driven by systematic emergency protocols.
+
 3. Final Strategic Conclusion
 The ideal profile for survival on the Titanic was a 1st or 2nd-class female traveling in a small family unit. Conversely, the highest risk profile was an adult, 3rd-class male traveling alone or as part of a massive family unit.
